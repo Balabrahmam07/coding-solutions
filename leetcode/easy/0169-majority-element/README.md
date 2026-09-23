@@ -42,16 +42,22 @@ Output: 2
 ## Solution
 
 **Language:** Python  
-**Runtime:** 8 ms (beats 46.05%)  
-**Memory:** 21.7 MB (beats 9.75%)  
-**Submitted:** 2026-09-23T08:28:31.158Z  
+**Runtime:** 7 ms (beats 61.80%)  
+**Memory:** 21.5 MB (beats 13.08%)  
+**Submitted:** 2026-09-23T08:35:50.208Z  
 
 ```py
 from collections import Counter
 
 class Solution:
     def majorityElement(self, nums: list[int]) -> int:
-        return Counter(nums).most_common(1)[0][0]
+        candidate = None
+        count = 0
+        for num in nums:
+            if count == 0:
+                candidate = num
+            count += (1 if num == candidate else -1)
+        return candidate
 ```
 
 ---
