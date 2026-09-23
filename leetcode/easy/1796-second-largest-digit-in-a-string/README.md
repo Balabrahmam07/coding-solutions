@@ -38,23 +38,23 @@ Explanation: The digits that appear in s are [1]. There is no second largest dig
 ## Solution
 
 **Language:** Python  
-**Runtime:** 0 ms  
-**Memory:** 19.5 MB  
-**Submitted:** 2026-09-23T09:11:50.351Z  
+**Runtime:** 3 ms (beats 73.89%)  
+**Memory:** 19.2 MB (beats 75.61%)  
+**Submitted:** 2026-09-23T09:16:46.137Z  
 
 ```py
 class Solution:
     def secondHighest(self, s: str) -> int:
-        largest = 0
-        second = 0
+        largest = -1
+        second = -1
         for i in s:
             if not i.isalpha():
                 n = int(i)
                 if n > largest:
                     second = largest
                     largest = n
-                elif largest == second:
-                    second = -1
+                elif largest > n > second:
+                    second = n
                 
         return second
 
