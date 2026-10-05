@@ -55,18 +55,30 @@ If we had started at the first tree, we would only pick from trees [1,2].
 ## Solution
 
 **Language:** Python  
-**Runtime:** 2 ms  
-**Memory:** 19.6 MB  
-**Submitted:** 2026-10-04T11:09:49.724Z  
+**Runtime:** 175 ms (beats 78.15%)  
+**Memory:** 25.8 MB (beats 64.45%)  
+**Submitted:** 2026-10-05T09:03:07.207Z  
 
 ```py
-from collections import Counter
 class Solution:
     def totalFruit(self, fruits: list[int]) -> int:
-        fruits = Counter(fruits)
-        n = fruits.most_common(1)[0][1]
-        x = fruits.most_common(2)[1][1]
-        return n+x
+        left = 0
+        fruits_count = {}
+        max_fruits = 0
+        for right in range(len(fruits)):
+            fruits_count[fruits[right]] = fruits_count.get(fruits[right], 0) + 1
+
+            while len(fruits_count) > 2:
+                fruits_count[fruits[left]] -= 1
+
+                if fruits_count[fruits[left]] == 0:
+                    del fruits_count[fruits[left]]
+                left += 1
+            
+            max_fruits = max(max_fruits, right - left + 1)
+        return max_fruits
+                
+
 ```
 
 ---
