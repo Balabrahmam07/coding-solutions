@@ -38,8 +38,8 @@ Output: false
 
 **Language:** Python  
 **Runtime:** 15 ms (beats 80.30%)  
-**Memory:** 19.3 MB (beats 86.47%)  
-**Submitted:** 2026-10-05T09:53:48.996Z  
+**Memory:** 19.2 MB (beats 97.75%)  
+**Submitted:** 2026-10-05T10:34:20.640Z  
 
 ```py
 class Solution:
@@ -58,7 +58,7 @@ class Solution:
         for right in range(len(s2)):
             window_count[ord(s2[right]) - ord('a')] += 1
 
-            while right - left + 1 > n:
+            if right - left + 1 > n:
                 window_count[ord(s2[left]) - ord('a')] -= 1
                 left += 1
 
