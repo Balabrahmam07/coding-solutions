@@ -14,7 +14,7 @@ class Solution:
         for right in range(len(s2)):
             window_count[ord(s2[right]) - ord('a')] += 1
 
-            while right - left + 1 > n:
+            if right - left + 1 > n:
                 window_count[ord(s2[left]) - ord('a')] -= 1
                 left += 1
 
