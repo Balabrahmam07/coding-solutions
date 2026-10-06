@@ -41,21 +41,33 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 ## Solution
 
 **Language:** Python  
-**Runtime:** 7215 ms (beats 5.01%)  
-**Memory:** 19.8 MB (beats 68.95%)  
-**Submitted:** 2026-10-06T06:15:01.388Z  
+**Runtime:** 23 ms (beats 96.39%)  
+**Memory:** 19.5 MB (beats 96.25%)  
+**Submitted:** 2026-10-06T06:31:26.885Z  
 
 ```py
 class Solution:
     def findAnagrams(self, s: str, p: str) -> list[int]:
-        p = sorted(p)
-        count = []
+        p_count = [0] * 26
+        window_count = [0] * 26
+
+        for i in p:
+            p_count[ord(i) - ord('a')] += 1
+        
+        n = len(p)
         left = 0
-        for right in range(len(p)-1, len(s)):
-            if sorted(s[left:right+1]) == p:
-                count.append(left)
-            left += 1
-        return count
+        result = []
+
+        for right in range(len(s)):
+            window_count[ord(s[right]) - ord('a')] += 1
+
+            if right - left + 1 > n:
+                window_count[ord(s[left]) - ord('a')] -= 1
+                left += 1
+            
+            if p_count == window_count:
+                result.append(left)
+        return result
 ```
 
 ---
